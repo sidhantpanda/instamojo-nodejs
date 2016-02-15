@@ -23,7 +23,7 @@ exports.PaymentData = function() {
     'phone' : null,
     'send_email' : '',
     'send_sms' : '',
-    'allow_repeated_payments' : 'False',
+    'allow_repeated_payments' : '',
     'webhook' : '',
     'redirect_url' : '',
   });
