@@ -5,7 +5,8 @@ var HOST = "https://www.instamojo.com/api/1.1/";
 var API = {
   'createPayment' : 'payment-requests/',
   'links'         : 'links/',
-  'paymentStatus' : 'payment-requests/'
+  'paymentStatus' : 'payment-requests/',
+  'refunds'       : 'refunds/',
 }
 
 var HEADERS = {
@@ -41,8 +42,12 @@ exports.getPaymentStatus = function(id, callback) {
   getPaymentStatus(id, callback);
 }
 
-exports.getAllPayments= function(callback) {
+exports.getAllPayments = function(callback) {
   getAllPayments(callback);
+}
+
+exports.getRefundDetails = function(id, callback) {
+  getRefundDetails(id, callback);
 }
 
 function createPayment(paymentData, callback) {
@@ -80,6 +85,16 @@ function getPaymentStatus(id, callback) {
   request.get({
     headers: HEADERS,
     url: HOST + API.paymentStatus + id + '/',
+  }, function(error, response, body){
+    var result = JSON.parse(body);
+    callback(error, result);
+  });
+}
+
+function getRefundDetails(id, callback) {
+  request.get({
+    headers: HEADERS,
+    url: HOST + API.refunds + id + '/',
   }, function(error, response, body){
     var result = JSON.parse(body);
     callback(error, result);
