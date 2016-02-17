@@ -72,3 +72,13 @@ Insta.getPaymentStatus("PAYMENT-ID", function(error, response) {
   }
 });
 ```
+### Get refund status for a refund id
+```javascript
+Insta.getRefundDetails("REFUND-ID", function(error, response) {
+  if (error) {
+    // Some error
+  } else {
+    // Refund status at response.refund.status
+    console.log(response);
+  }
+});
