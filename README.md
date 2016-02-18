@@ -1,5 +1,5 @@
 # Instamojo NodeJs Wrapper
-A NodeJs wrapper for Instamojo APIs
+A NodeJs wrapper for [Instamojo APIs](https://www.instamojo.com/developers/rest).
 
 ```
 npm install instamojo-nodejs
@@ -87,3 +87,7 @@ data.allow_repeated_payments = 'False';
 data.webhook = 'Your endpoint to capture POST data from a payment';
 data.redirect_url = 'Your endpoint where instamojo redirects user to after payment';
 ```
+
+---
+### Submit issues
+You can raise an issue in this repo or mail me at sidhant@hashexclude.com
