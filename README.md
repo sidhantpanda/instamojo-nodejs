@@ -1,17 +1,14 @@
 # Instamojo NodeJs Wrapper
 A NodeJs wrapper for Instamojo APIs
 
-### Configure your keys in instamojo.js
-```javascript
-var HEADERS = {
-  'X-Api-Key'    : "YOUR-API-KEY",
-  'X-Auth-Token' : "YOUR-AUTH-TOKEN",
-}
+```
+npm install instamojo-nodejs
 ```
 
-### Include in your project
+### Include and set keys
 ```javascript
-var Insta = require('path/to/instamojo.js');
+var Insta = require('instamojo-nodejs');
+Insta.setKeys(API_KEY, AUTH_KEY);
 ```
 
 ### Create new payment request
@@ -20,15 +17,7 @@ var data = new Insta.PaymentData();
 
 data.purpose = "Test";            // REQUIRED
 data.amount = 9;                  // REQUIRED
-data.currency = 'INR';
-data.buyer_name = '<buyer name>';
-data.email = '<buyer email>';
-data.phone = 1234567890;
-data.send_sms = 'False';
-data.send_email = 'False';
-data.allow_repeated_payments = 'False';
-data.webhook = 'Your endpoint to capture POST data from a payment';
-data.redirect_url = 'Your endpoint where instamojo redirects user to after payment';
+data.setRedirectUrl(REDIRECT_URL);
 
 Insta.createPayment(data, function(error, response) {
   if (error) {
@@ -39,6 +28,7 @@ Insta.createPayment(data, function(error, response) {
   }
 });
 ```
+You can set additional data parameters. [See here](#payment_data)
 
 ### See all payment links
 ```javascript
@@ -82,3 +72,18 @@ Insta.getRefundDetails("REFUND-ID", function(error, response) {
     console.log(response);
   }
 });
+```
+
+
+### <a name="payment_data"></a>Additional Payment Data
+```javascript
+data.currency = 'INR';
+data.buyer_name = '<buyer name>';
+data.email = '<buyer email>';
+data.phone = 1234567890;
+data.send_sms = 'False';
+data.send_email = 'False';
+data.allow_repeated_payments = 'False';
+data.webhook = 'Your endpoint to capture POST data from a payment';
+data.redirect_url = 'Your endpoint where instamojo redirects user to after payment';
+```
