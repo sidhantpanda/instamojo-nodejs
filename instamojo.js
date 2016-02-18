@@ -9,94 +9,89 @@ var API = {
   'refunds'       : 'refunds/',
 }
 
-var HEADERS = {
-  'X-Api-Key'    : "YOUR-API-KEY",
-  'X-Auth-Token' : "YOUR-AUTH-TOKEN",
-}
+module.exports = {
+  HEADERS: {
+    'X-Api-Key'    : "YOUR-API-KEY",
+    'X-Auth-Token' : "YOUR-AUTH-TOKEN",
+  },
 
-exports.PaymentData = function() {
-  return ({
-    'purpose' : '', // required
-    'amount'  : 0,  // required
-    'currency': 'INR',
-    'buyer_name' : '',
-    'email' : '',
-    'phone' : null,
-    'send_email' : '',
-    'send_sms' : '',
-    'allow_repeated_payments' : '',
-    'webhook' : '',
-    'redirect_url' : '',
-  });
-}
+  setKeys: function(apiKey, authKey) {
+    this.HEADERS['X-Api-Key']  = apiKey;
+    this.HEADERS['X-Auth-Token'] = authKey;
+  },
 
-exports.createPayment = function(data, callback) {
-  createPayment(data, callback);
-}
+  createPayment: function(data, callback) {
+    request.post({
+      headers: this.HEADERS,
+      url: HOST + API.createPayment,
+      form: data,
+    }, function(error, response, body){
+      var result = JSON.parse(body);
+      callback(error, result);
+    });
+  },
 
-exports.seeAllLinks = function(callback) {
-  seeAllLinks(callback);
-}
+  seeAllLinks: function(callback) {
+    request.get({
+      headers: this.HEADERS,
+      url: HOST + API.links,
+    }, function(error, response, body){
+      var result = JSON.parse(body);
+      callback(error, result);
+    });
+  },
 
-exports.getPaymentStatus = function(id, callback) {
-  getPaymentStatus(id, callback);
-}
+  getAllPayments: function(callback) {
+    request.get({
+      headers: this.HEADERS,
+      url: HOST + API.paymentStatus,
+    }, function(error, response, body){
+      var result = JSON.parse(body);
+      callback(error, result);
+    });
+  },
 
-exports.getAllPayments = function(callback) {
-  getAllPayments(callback);
-}
+  getPaymentStatus: function(id, callback) {
+    request.get({
+      headers: this.HEADERS,
+      url: HOST + API.paymentStatus + id + '/',
+    }, function(error, response, body){
+      var result = JSON.parse(body);
+      callback(error, result);
+    });
+  },
 
-exports.getRefundDetails = function(id, callback) {
-  getRefundDetails(id, callback);
-}
+  getRefundDetails: function(id, callback) {
+    request.get({
+      headers: this.HEADERS,
+      url: HOST + API.refunds + id + '/',
+    }, function(error, response, body){
+      var result = JSON.parse(body);
+      callback(error, result);
+    });
+  },
 
-function createPayment(paymentData, callback) {
-  request.post({
-    headers: HEADERS,
-    url: HOST + API.createPayment,
-    form: paymentData,
-  }, function(error, response, body){
-    var result = JSON.parse(body);
-    callback(error, result);
-  });
-}
+  PaymentData: function() {
+    return ({
+      'purpose' : '', // required
+      'amount'  : 0,  // required
+      'currency': 'INR',
+      'buyer_name' : '',
+      'email' : '',
+      'phone' : null,
+      'send_email' : '',
+      'send_sms' : '',
+      'allow_repeated_payments' : '',
+      'webhook' : '',
+      'redirect_url' : '',
 
-function seeAllLinks(callback) {
-  request.get({
-    headers: HEADERS,
-    url: HOST + API.links,
-  }, function(error, response, body){
-    var result = JSON.parse(body);
-    callback(error, result);
-  });
-}
+      setWebhook: function(hook) {
+        this.webhook = hook;
+      },
 
-function getAllPayments(callback) {
-  request.get({
-    headers: HEADERS,
-    url: HOST + API.paymentStatus,
-  }, function(error, response, body){
-    var result = JSON.parse(body);
-    callback(error, result);
-  });
-}
-
-function getPaymentStatus(id, callback) {
-  request.get({
-    headers: HEADERS,
-    url: HOST + API.paymentStatus + id + '/',
-  }, function(error, response, body){
-    var result = JSON.parse(body);
-    callback(error, result);
-  });
-}
-
-function getRefundDetails(id, callback) {
-  request.get({
-    headers: HEADERS,
-    url: HOST + API.refunds + id + '/',
-  }, function(error, response, body){
-    var result = JSON.parse(body);
-    callback(error, result);
-  });
-}
+      setRedirectUrl: function(redirectUrl) {
+        this.redirect_url = redirectUrl;
+      }
+    });
+  }
+};

@@ -1,6 +1,6 @@
 {
   "name": "instamojo-nodejs",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Instamojo API Wrapper",
   "main": "instamojo.js",
   "scripts": {
@@ -25,5 +25,8 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "request": "^2.69.0"
   }
 }
