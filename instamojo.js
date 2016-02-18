@@ -22,9 +22,9 @@ module.exports = {
 
   createPayment: function(data, callback) {
     request.post({
-      headers: this.HEADERS,
-      url: HOST + API.createPayment,
-      form: data,
+      headers : this.HEADERS,
+      url     : HOST + API.createPayment,
+      form    : data,
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -33,8 +33,8 @@ module.exports = {
 
   seeAllLinks: function(callback) {
     request.get({
-      headers: this.HEADERS,
-      url: HOST + API.links,
+      headers : this.HEADERS,
+      url     : HOST + API.links,
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -43,8 +43,8 @@ module.exports = {
 
   getAllPayments: function(callback) {
     request.get({
-      headers: this.HEADERS,
-      url: HOST + API.paymentStatus,
+      headers : this.HEADERS,
+      url     : HOST + API.paymentStatus,
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -53,8 +53,19 @@ module.exports = {
 
   getPaymentStatus: function(id, callback) {
     request.get({
-      headers: this.HEADERS,
-      url: HOST + API.paymentStatus + id + '/',
+      headers : this.HEADERS,
+      url     : HOST + API.paymentStatus + id + '/',
+    }, function(error, response, body){
+      var result = JSON.parse(body);
+      callback(error, result);
+    });
+  },
+
+  createRefund: function(refundRequest, callback) {
+    request.post({
+      headers : this.HEADERS,
+      url     : HOST + API.refunds + '/',
+      form    : refundRequest,
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -93,5 +104,17 @@ module.exports = {
         this.redirect_url = redirectUrl;
       }
     });
-  }
+  },
+
+  RefundRequest: function() {
+    return ({
+      'payment_id'    : '',
+      'type'          : '',  // Available : ['RFD', 'TNR', 'QFL', 'QNR', 'EWN', 'TAN', 'PTH']
+      'body'          : '',
+
+      setRefundAmount: function(refundAmount) {
+        this.refund_amount = refundAmount;
+      }
+    });
+  },
 };
