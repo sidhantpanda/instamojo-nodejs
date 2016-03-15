@@ -22,7 +22,7 @@
       <h1>
 <a id="instamojo-nodejs-wrapper" class="anchor" href="#instamojo-nodejs-wrapper" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Instamojo NodeJs Wrapper</h1>
 
-<p>A NodeJs wrapper for <a href="https://www.instamojo.com/developers/rest">Instamojo APIs</a>.</p>
+<p>A node wrapper library for <a href="https://www.instamojo.com/developers/rest">Instamojo APIs</a>.</p>
 
 <pre><code>npm install instamojo-nodejs
 </code></pre>
@@ -107,7 +107,7 @@
 <span class="pl-smi">refund</span>.<span class="pl-c1">body</span>       <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>;
 <span class="pl-smi">refund</span>.<span class="pl-en">setRefundAmount</span>(<span class="pl-c1">8</span>);  <span class="pl-c">// Optional, if you want to refund partial amount</span>
 <span class="pl-smi">Insta</span>.<span class="pl-en">createRefund</span>(refund, <span class="pl-k">function</span>(<span class="pl-smi">error</span>, <span class="pl-smi">response</span>) {
-  <span class="pl-smi">res</span>.<span class="pl-c1">send</span>(response);
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(response);
 });</pre></div>
 
 <p>Details on refund types <a href="https://www.instamojo.com/developers/rest/#toc-refunds">here</a>.</p>
@@ -127,15 +127,15 @@
 <h4>
 <a id="additional-payment-data" class="anchor" href="#additional-payment-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="payment_data"></a>Additional Payment Data</h4>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">data</span>.<span class="pl-smi">currency</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>INR<span class="pl-pds">'</span></span>;
-<span class="pl-smi">data</span>.<span class="pl-smi">buyer_name</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;buyer name&gt;<span class="pl-pds">'</span></span>;
-<span class="pl-smi">data</span>.<span class="pl-smi">email</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;buyer email&gt;<span class="pl-pds">'</span></span>;
-<span class="pl-smi">data</span>.<span class="pl-smi">phone</span> <span class="pl-k">=</span> <span class="pl-c1">1234567890</span>;
-<span class="pl-smi">data</span>.<span class="pl-smi">send_sms</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>False<span class="pl-pds">'</span></span>;
-<span class="pl-smi">data</span>.<span class="pl-smi">send_email</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>False<span class="pl-pds">'</span></span>;
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">data</span>.<span class="pl-smi">currency</span>                <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>INR<span class="pl-pds">'</span></span>;
+<span class="pl-smi">data</span>.<span class="pl-smi">buyer_name</span>              <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;buyer name&gt;<span class="pl-pds">'</span></span>;
+<span class="pl-smi">data</span>.<span class="pl-smi">email</span>                   <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;buyer email&gt;<span class="pl-pds">'</span></span>;
+<span class="pl-smi">data</span>.<span class="pl-smi">phone</span>                   <span class="pl-k">=</span> <span class="pl-c1">1234567890</span>;
+<span class="pl-smi">data</span>.<span class="pl-smi">send_sms</span>                <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>False<span class="pl-pds">'</span></span>;
+<span class="pl-smi">data</span>.<span class="pl-smi">send_email</span>              <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>False<span class="pl-pds">'</span></span>;
 <span class="pl-smi">data</span>.<span class="pl-smi">allow_repeated_payments</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>False<span class="pl-pds">'</span></span>;
-<span class="pl-smi">data</span>.<span class="pl-smi">webhook</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Your endpoint to capture POST data from a payment<span class="pl-pds">'</span></span>;
-<span class="pl-smi">data</span>.<span class="pl-smi">redirect_url</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Your endpoint where instamojo redirects user to after payment<span class="pl-pds">'</span></span>;</pre></div>
+<span class="pl-smi">data</span>.<span class="pl-smi">webhook</span>                 <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Your endpoint to capture POST data from a payment<span class="pl-pds">'</span></span>;
+<span class="pl-smi">data</span>.<span class="pl-smi">redirect_url</span>            <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>Your endpoint where instamojo redirects user to after payment<span class="pl-pds">'</span></span>;</pre></div>
 
 <hr>
 
