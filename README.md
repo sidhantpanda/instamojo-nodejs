@@ -1,5 +1,5 @@
 # Instamojo NodeJs Wrapper 
-A NodeJs wrapper for [Instamojo APIs](https://www.instamojo.com/developers/rest).
+A node wrapper library for [Instamojo APIs](https://www.instamojo.com/developers/rest).
 
 ```
 npm install instamojo-nodejs
