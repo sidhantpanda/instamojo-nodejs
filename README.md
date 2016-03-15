@@ -78,7 +78,7 @@ refund.type       = '';     // Available : ['RFD', 'TNR', 'QFL', 'QNR', 'EWN', '
 refund.body       = '';
 refund.setRefundAmount(8);  // Optional, if you want to refund partial amount
 Insta.createRefund(refund, function(error, response) {
-  res.send(response);
+  console.log(response);
 });
 ```
 Details on refund types [here](https://www.instamojo.com/developers/rest/#toc-refunds).
@@ -99,15 +99,15 @@ Insta.getRefundDetails("REFUND-ID", function(error, response) {
 
 #### <a name="payment_data"></a>Additional Payment Data
 ```javascript
-data.currency = 'INR';
-data.buyer_name = '<buyer name>';
-data.email = '<buyer email>';
-data.phone = 1234567890;
-data.send_sms = 'False';
-data.send_email = 'False';
+data.currency                = 'INR';
+data.buyer_name              = '<buyer name>';
+data.email                   = '<buyer email>';
+data.phone                   = 1234567890;
+data.send_sms                = 'False';
+data.send_email              = 'False';
 data.allow_repeated_payments = 'False';
-data.webhook = 'Your endpoint to capture POST data from a payment';
-data.redirect_url = 'Your endpoint where instamojo redirects user to after payment';
+data.webhook                 = 'Your endpoint to capture POST data from a payment';
+data.redirect_url            = 'Your endpoint where instamojo redirects user to after payment';
 ```
 ---
 ![npm version](https://badge.fury.io/js/instamojo-nodejs.svg)

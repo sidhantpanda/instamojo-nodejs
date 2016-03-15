@@ -6,13 +6,13 @@ var API = {
   'createPayment' : 'payment-requests/',
   'links'         : 'links/',
   'paymentStatus' : 'payment-requests/',
-  'refunds'       : 'refunds/',
-}
+  'refunds'       : 'refunds/'
+};
 
 module.exports = {
   HEADERS: {
     'X-Api-Key'    : "YOUR-API-KEY",
-    'X-Auth-Token' : "YOUR-AUTH-TOKEN",
+    'X-Auth-Token' : "YOUR-AUTH-TOKEN"
   },
 
   setKeys: function(apiKey, authKey) {
@@ -24,7 +24,7 @@ module.exports = {
     request.post({
       headers : this.HEADERS,
       url     : HOST + API.createPayment,
-      form    : data,
+      form    : data
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -34,7 +34,7 @@ module.exports = {
   seeAllLinks: function(callback) {
     request.get({
       headers : this.HEADERS,
-      url     : HOST + API.links,
+      url     : HOST + API.links
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -44,7 +44,7 @@ module.exports = {
   getAllPayments: function(callback) {
     request.get({
       headers : this.HEADERS,
-      url     : HOST + API.paymentStatus,
+      url     : HOST + API.paymentStatus
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -54,7 +54,7 @@ module.exports = {
   getPaymentStatus: function(id, callback) {
     request.get({
       headers : this.HEADERS,
-      url     : HOST + API.paymentStatus + id + '/',
+      url     : HOST + API.paymentStatus + id + '/'
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -65,7 +65,7 @@ module.exports = {
     request.post({
       headers : this.HEADERS,
       url     : HOST + API.refunds + '/',
-      form    : refundRequest,
+      form    : refundRequest
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -75,7 +75,7 @@ module.exports = {
   getRefundDetails: function(id, callback) {
     request.get({
       headers: this.HEADERS,
-      url: HOST + API.refunds + id + '/',
+      url: HOST + API.refunds + id + '/'
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -116,5 +116,5 @@ module.exports = {
         this.refund_amount = refundAmount;
       }
     });
-  },
+  }
 };
