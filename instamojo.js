@@ -41,7 +41,7 @@ module.exports = {
     });
   },
 
-  getAllPayments: function(callback) {
+  getAllPaymentRequests: function(callback) {
     request.get({
       headers : this.HEADERS,
       url     : HOST + API.paymentStatus
@@ -51,10 +51,20 @@ module.exports = {
     });
   },
 
-  getPaymentStatus: function(id, callback) {
+  getPaymentRequestStatus: function(id, callback) {
     request.get({
       headers : this.HEADERS,
       url     : HOST + API.paymentStatus + id + '/'
+    }, function(error, response, body){
+      var result = JSON.parse(body);
+      callback(error, result);
+    });
+  },
+
+  getPaymentDetails: function(payment_request_id, payment_id, callback) {
+    request.get({
+      headers : this.HEADERS,
+      url     : HOST + API.paymentStatus + payment_request_id + '/' + payment_id + '/'
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -66,6 +76,16 @@ module.exports = {
       headers : this.HEADERS,
       url     : HOST + API.refunds + '/',
       form    : refundRequest
+    }, function(error, response, body){
+      var result = JSON.parse(body);
+      callback(error, result);
+    });
+  },
+
+  getAllRefunds: function(callback) {
+    request.get({
+      headers: this.HEADERS,
+      url: HOST + API.refunds
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
