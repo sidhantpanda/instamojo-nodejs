@@ -1,6 +1,6 @@
 {
   "name": "instamojo-nodejs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Instamojo API Wrapper",
   "main": "instamojo.js",
   "scripts": {

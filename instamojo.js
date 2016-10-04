@@ -1,6 +1,9 @@
 var request = require('request');
 
-var HOST = "https://www.instamojo.com/api/1.1/";
+var HOSTS = {
+  'production' : "https://www.instamojo.com/api/1.1/",
+  'test'       : "https://test.instamojo.com/api/1.1/"
+};
 
 var API = {
   'createPayment' : 'payment-requests/',
@@ -15,6 +18,16 @@ module.exports = {
     'X-Auth-Token' : "YOUR-AUTH-TOKEN"
   },
 
+  CURRENT_HOST : 'production',
+
+  isSandboxMode : function(isSandbox) {
+    if (isSandbox) {
+      this.CURRENT_HOST = 'test';
+    } else {
+      this.CURRENT_HOST = 'production';
+    }
+  },
+
   setKeys: function(apiKey, authKey) {
     this.HEADERS['X-Api-Key']  = apiKey;
     this.HEADERS['X-Auth-Token'] = authKey;
@@ -23,10 +36,10 @@ module.exports = {
   createPayment: function(data, callback) {
     request.post({
       headers : this.HEADERS,
-      url     : HOST + API.createPayment,
+      url     : HOSTS[this.CURRENT_HOST] + API.createPayment,
       form    : data
     }, function(error, response, body){
-      var result = JSON.parse(body);
+      var result = body;
       callback(error, result);
     });
   },
@@ -34,7 +47,7 @@ module.exports = {
   seeAllLinks: function(callback) {
     request.get({
       headers : this.HEADERS,
-      url     : HOST + API.links
+      url     : HOSTS[this.CURRENT_HOST] + API.links
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -44,7 +57,7 @@ module.exports = {
   getAllPaymentRequests: function(callback) {
     request.get({
       headers : this.HEADERS,
-      url     : HOST + API.paymentStatus
+      url     : HOSTS[this.CURRENT_HOST] + API.paymentStatus
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -54,7 +67,7 @@ module.exports = {
   getPaymentRequestStatus: function(id, callback) {
     request.get({
       headers : this.HEADERS,
-      url     : HOST + API.paymentStatus + id + '/'
+      url     : HOSTS[this.CURRENT_HOST] + API.paymentStatus + id + '/'
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -64,7 +77,7 @@ module.exports = {
   getPaymentDetails: function(payment_request_id, payment_id, callback) {
     request.get({
       headers : this.HEADERS,
-      url     : HOST + API.paymentStatus + payment_request_id + '/' + payment_id + '/'
+      url     : HOSTS[this.CURRENT_HOST] + API.paymentStatus + payment_request_id + '/' + payment_id + '/'
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -74,7 +87,7 @@ module.exports = {
   createRefund: function(refundRequest, callback) {
     request.post({
       headers : this.HEADERS,
-      url     : HOST + API.refunds + '/',
+      url     : HOSTS[this.CURRENT_HOST] + API.refunds + '/',
       form    : refundRequest
     }, function(error, response, body){
       var result = JSON.parse(body);
@@ -85,7 +98,7 @@ module.exports = {
   getAllRefunds: function(callback) {
     request.get({
       headers: this.HEADERS,
-      url: HOST + API.refunds
+      url: HOSTS[this.CURRENT_HOST] + API.refunds
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -95,7 +108,7 @@ module.exports = {
   getRefundDetails: function(id, callback) {
     request.get({
       headers: this.HEADERS,
-      url: HOST + API.refunds + id + '/'
+      url: HOSTS[this.CURRENT_HOST] + API.refunds + id + '/'
     }, function(error, response, body){
       var result = JSON.parse(body);
       callback(error, result);
@@ -104,17 +117,17 @@ module.exports = {
 
   PaymentData: function() {
     return ({
-      'purpose' : '', // required
-      'amount'  : 0,  // required
-      'currency': 'INR',
-      'buyer_name' : '',
-      'email' : '',
-      'phone' : null,
-      'send_email' : '',
-      'send_sms' : '',
+      'purpose'                 : '', // required
+      'amount'                  : 0,  // required
+      'currency'                : 'INR',
+      'buyer_name'              : '',
+      'email'                   : '',
+      'phone'                   : null,
+      'send_email'              : '',
+      'send_sms'                : '',
       'allow_repeated_payments' : '',
-      'webhook' : '',
-      'redirect_url' : '',
+      'webhook'                 : '',
+      'redirect_url'            : '',
 
       setWebhook: function(hook) {
         this.webhook = hook;

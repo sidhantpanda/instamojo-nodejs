@@ -20,6 +20,7 @@ Insta.setKeys(API_KEY, AUTH_KEY);
 * [Initiate refund](#create_refund)
 * [Get refund details](#get_refund_details)
 * [Get all refunds](#get_all_refunds)
+* [Set sanboxmode](#set_sandbox_mode)
 
 ### <a name="create_payment"></a>Create new payment request
 ```javascript
@@ -134,7 +135,15 @@ data.allow_repeated_payments = 'False';
 data.webhook                 = 'Your endpoint to capture POST data from a payment';
 data.redirect_url            = 'Your endpoint where instamojo redirects user to after payment';
 ```
+
+#### <a name="set_sandbox_mode"></a>Set sandbox mode
+```javascript
+Insta.isSandboxMode(true);
+```
 ---
+
+### Changes in v0.0.4
+- [Added sandbox mode](#get_all_refunds)
 
 
 ### Changes in v0.0.3
