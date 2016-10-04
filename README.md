@@ -76,7 +76,7 @@ Insta.getPaymentRequestStatus("PAYMENT-REQUEST-ID", function(error, response) {
 
 ### <a name="get_payment_details"></a>Get payment details for a particular payment id and payment request id
 ```javascript
-Insta.getPaymentStatus("PAYMENT-REQUEST-ID", "PAYMENT-ID", function(error, response) {
+Insta.getPaymentDetails("PAYMENT-REQUEST-ID", "PAYMENT-ID", function(error, response) {
   if (error) {
     // Some error
   } else {
